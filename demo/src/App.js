@@ -116,9 +116,8 @@ const THRESHOLD = 1000;
 
   })
 
-  const updateCart = (product, quantity) => {
-    if (quantity < 1) return
-    console.log(product, quantity)
+  const updateCart = (product) => {
+    const quantity=1
     setCartItem((prevCart) => {
       let exist = prevCart.find((item) => item.id === product.id)
       if (exist) {
