@@ -17,7 +17,8 @@ function App() {
 
   let total = cart.map((item) => item.price * item.quantity).reduce((acc, elem) => acc += elem, 0)
   console.log(total, "total")
-  const progress = Math.floor((total / THRESHOLD) * 100)
+  const rawProgress = Math.floor((total / THRESHOLD) * 100);
+  const progress = Math.min(rawProgress, 100);
 
   
   useEffect(()=>{
