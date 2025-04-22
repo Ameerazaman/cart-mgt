@@ -1,50 +1,31 @@
-import React from "react";
+import React from 'react'
 
-export default function Cart({ cartItems, updateQuantity, removeFromCart }) {
-  return (
-    <div className="mt-6">
-      <h2 className="text-xl font-semibold mb-2">Your Cart</h2>
-      {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        cartItems.map((item) => (
-          <div
-            key={item.id}
-            className="flex justify-between items-center border p-2 mb-2 rounded"
-          >
-            <span>
-              {item.name} (₹{item.price}) × {item.quantity}
-            </span>
-            <div className="flex gap-2 items-center">
-              {item.price !== 0 && (
-                <>
-                  <button
-                    className="bg-gray-300 px-2"
-                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                  >
-                    -
-                  </button>
-                  <span>{item.quantity}</span>
-                  <button
-                    className="bg-gray-300 px-2"
-                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                  >
-                    +
-                  </button>
-                </>
-              )}
-              {item.price !== 0 && (
-                <button
-                  className="bg-red-500 text-white px-2 py-1 rounded"
-                  onClick={() => removeFromCart(item.id)}
+function Cart({ cartItem, updatedQuantity, removeItem }) {
+    console.log(cartItem, "caritem")
+    return (
+        <div>
+            <h1 className='text-center '>Cart</h1>
+            {cartItem.map((item) =>
+                <div
+                    key={item.id}
+                    className="border rounded-lg p-4 mb-4 flex items-center justify-between bg-white shadow-md"
                 >
-                  Remove
-                </button>
-              )}
-            </div>
-          </div>
-        ))
-      )}
-    </div>
-  );
+                    <div className="flex flex-col">
+                        <span className="font-semibold text-lg">{item.name}</span>
+                        <span className="text-gray-600">₹{item.price}*{item.quantity}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <button className="bg-gray-300 px-2 py-1 rounded" onClick={() => updatedQuantity(item.id, item.quantity - 1)}>-</button>
+                        <span className="px-2">{item.quantity}</span>
+                        <button className="bg-gray-300 px-2 py-1 rounded" onClick={() => updatedQuantity(item.id, item.quantity + 1)}>+</button>
+                        <button className="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600 transition" onClick={() => removeItem(item.id)}>
+                            remove
+                        </button>
+                    </div>
+                </div>
+            )}
+        </div>
+    )
 }
+
+export default Cart
